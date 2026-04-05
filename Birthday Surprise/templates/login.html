@@ -1,0 +1,180 @@
+<!DOCTYPE html>
+<html>
+<head>
+<title>Birthday Surprise</title>
+
+<style>
+body{
+    margin:0;
+    height:100vh;
+    background: linear-gradient(135deg, #ffdde1, #c2e9fb);
+    background-size: 300% 300%;
+    animation: bgMove 8s ease infinite;
+    display:flex;
+    justify-content:center;
+    align-items:center;
+    font-family: 'Segoe UI', sans-serif;
+    overflow:hidden;
+}
+
+/* Background animation */
+@keyframes bgMove{
+    0%{background-position:0% 50%;}
+    50%{background-position:100% 50%;}
+    100%{background-position:0% 50%;}
+}
+
+/* Card */
+.container{
+    background: rgba(255,255,255,0.85);
+    padding:30px;
+    border-radius:20px;
+    text-align:center;
+    box-shadow:0 10px 30px rgba(0,0,0,0.2);
+    animation:fadeIn 1.5s ease;
+}
+
+/* Entry animation */
+@keyframes fadeIn{
+    from{
+        opacity:0;
+        transform:translateY(30px);
+    }
+    to{
+        opacity:1;
+        transform:translateY(0);
+    }
+}
+
+/* Title */
+h1{
+    color:#ff4d6d;
+    font-size:22px;
+}
+
+/* Text */
+p{
+    color:#444;
+}
+
+/* Input */
+input{
+    padding:12px;
+    border-radius:25px;
+    border:1px solid #ddd;
+    text-align:center;
+    margin-top:10px;
+}
+
+/* Button */
+button{
+    margin-top:15px;
+    padding:10px 25px;
+    border:none;
+    border-radius:25px;
+    background: linear-gradient(to right,#ff4d6d,#0072ff);
+    color:white;
+    cursor:pointer;
+    transition:0.3s;
+}
+
+button:hover{
+    transform:scale(1.1);
+}
+
+button:active{
+    transform:scale(0.95);
+    box-shadow:0 0 20px #ff4d6d;
+}
+
+/* Shake */
+.shake{
+    animation:shake 0.3s;
+}
+
+@keyframes shake{
+    0%{transform:translateX(0);}
+    25%{transform:translateX(-5px);}
+    50%{transform:translateX(5px);}
+    75%{transform:translateX(-5px);}
+    100%{transform:translateX(0);}
+}
+
+/* Floating hearts */
+.heart{
+    position:absolute;
+    font-size:18px;
+    animation:float 6s linear infinite;
+}
+
+@keyframes float{
+    0%{transform:translateY(100vh);opacity:1;}
+    100%{transform:translateY(-10vh);opacity:0;}
+}
+</style>
+
+</head>
+<body>
+
+<div class="container">
+
+<h1>💖 Hey... un smile kaaga oru small surprise Jagan 😌✨</h1>
+
+<p>Just a small surprise made with lots of love 💖</p>
+<p>Hint: Your first cry… enter it 👶</p>
+
+<form method="POST" onsubmit="return checkLogin(event)">
+    <input type="password" id="pwd" name="password" placeholder="Enter password">
+    <br>
+    <button type="submit">Surprise 🎁</button>
+</form>
+
+</div>
+
+<!-- Background Music -->
+<audio id="bgm" loop>
+    <source src="/static/music.mpeg" type="audio/mpeg">
+</audio>
+
+<!-- Click Sound -->
+<audio id="clickSound">
+    <source src="/static/click.mp3" type="audio/mp3">
+</audio>
+
+<script>
+// Start music on click
+document.body.addEventListener("click", () => {
+    document.getElementById("bgm").play();
+}, { once: true });
+
+// Floating hearts + sparkle
+setInterval(()=>{
+    let heart = document.createElement("div");
+    heart.className="heart";
+    heart.innerHTML = Math.random() > 0.5 ? "💖" : "✨";
+    heart.style.left = Math.random()*100 + "vw";
+    heart.style.fontSize = (10 + Math.random()*20) + "px";
+    document.body.appendChild(heart);
+
+    setTimeout(()=>heart.remove(),6000);
+},300);
+
+// Login check
+function checkLogin(e){
+    document.getElementById("clickSound").play();
+
+    let input = document.getElementById("pwd");
+
+    if(input.value !== "0504"){
+        e.preventDefault();
+        input.classList.add("shake");
+        setTimeout(()=>input.classList.remove("shake"),300);
+        return false;
+    }
+
+    return true;
+}
+</script>
+
+</body>
+</html>

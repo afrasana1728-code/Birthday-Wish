@@ -1,0 +1,124 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <meta charset="UTF-8">
+    <title>Photo Memories</title>
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+            background-color: #fff0f5;
+            text-align: center;
+            margin: 0;
+            padding: 30px;
+        }
+
+        h1 {
+            color: #1e90ff; /* Blue for blessings vibe */
+            font-size: 2em;
+            margin-bottom: 30px;
+            text-shadow: 1px 1px 5px rgba(0,0,0,0.2);
+        }
+
+        .photo-container {
+            width: 50vw;
+            max-width: 500px;
+            margin: 0 auto;
+            border-radius: 12px;
+            box-shadow: 0 5px 15px rgba(0,0,0,0.3);
+        }
+
+        .photo-container img {
+            width: 100%;
+            height: auto;
+            border-radius: 12px;
+            display: block;
+        }
+
+        .buttons {
+            margin-top: 20px;
+        }
+
+        button {
+            background-color: #1e90ff;
+            color: white;
+            border: none;
+            padding: 12px 25px;
+            font-size: 18px;
+            border-radius: 10px;
+            cursor: pointer;
+            margin: 0 10px;
+            transition: transform 0.2s, background-color 0.2s;
+        }
+
+        button:hover {
+            background-color: #63b3ff;
+            transform: scale(1.05);
+        }
+
+        @media (max-width: 768px) {
+            .photo-container {
+                width: 80vw;
+            }
+            button {
+                padding: 10px 20px;
+                font-size: 16px;
+            }
+            h1 {
+                font-size: 1.5em;
+            }
+        }
+    </style>
+</head>
+<body>
+
+<h1>Walking with His Blessings 💙</h1>
+
+<div class="photo-container">
+    <img id="photo" src="{{ url_for('static', filename='img1.jpg') }}">
+</div>
+
+<div class="buttons">
+    <button onclick="prevPhoto()">Previous Photo</button>
+    <button onclick="nextPhoto()">Next Photo</button>
+    <button onclick="goToVideo()">Next Page 💌</button>
+</div>
+
+<script>
+const photos = [
+    "{{ url_for('static', filename='img1.jpg') }}",
+    "{{ url_for('static', filename='img2.jpg') }}",
+    "{{ url_for('static', filename='img3.jpg') }}",
+    "{{ url_for('static', filename='img4.jpg') }}",
+    "{{ url_for('static', filename='img5.jpg') }}",
+    "{{ url_for('static', filename='img6.jpg') }}"
+];
+
+let currentIndex = 0;
+
+function showPhoto(index) {
+    document.getElementById('photo').src = photos[index];
+}
+
+function nextPhoto() {
+    currentIndex++;
+    if(currentIndex >= photos.length) {
+        currentIndex = 0;
+    }
+    showPhoto(currentIndex);
+}
+
+function prevPhoto() {
+    currentIndex--;
+    if(currentIndex < 0) {
+        currentIndex = photos.length - 1;
+    }
+    showPhoto(currentIndex);
+}
+
+function goToVideo() {
+    window.location.href = "/video"; // Go to video page
+}
+</script>
+
+</body>
+</html>

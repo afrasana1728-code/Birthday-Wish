@@ -1,0 +1,28 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <title>Happy Birthday</title>
+    <link rel="stylesheet" href="{{ url_for('static', filename='style.css') }}">
+</head>
+<body>
+
+<h1 class="title">🎉 Happy Birthday 🎉</h1>
+
+<p class="msg">You are the most special person in my life 💖</p>
+
+<img src="{{ url_for('static', filename='img1.jpg') }}" class="photo">
+
+<button onclick="playMusic()">Play Music 🎵</button>
+
+<audio id="music">
+    <source src="{{ url_for('static', filename='music.mp3') }}">
+</audio>
+
+<script>
+function playMusic(){
+    document.getElementById("music").play();
+}
+</script>
+
+</body>
+</html>

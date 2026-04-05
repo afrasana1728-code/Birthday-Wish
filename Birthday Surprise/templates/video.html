@@ -1,0 +1,127 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <meta charset="UTF-8">
+    <title>Special Message</title>
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+            margin: 0;
+            padding: 30px;
+            text-align: center;
+            background: linear-gradient(135deg, #e0f7ff, #fff0f5);
+        }
+
+        h1 {
+            color: #1e90ff;
+            font-size: 2em;
+            margin-bottom: 30px;
+            text-shadow: 1px 1px 5px rgba(0,0,0,0.2);
+        }
+
+        .video-container {
+            position: relative;
+            display: inline-block;
+            border-radius: 12px;
+            overflow: hidden;
+            box-shadow: 0 8px 20px rgba(0,0,0,0.3);
+        }
+
+        video {
+            width: 80%;
+            max-width: 600px;
+            height: auto;
+            border-radius: 12px;
+            display: block;
+        }
+
+        .sparkles {
+            position: absolute;
+            width: 100%;
+            height: 100%;
+            top: 0;
+            left: 0;
+            pointer-events: none;
+            z-index: 0;
+        }
+
+        .spark {
+            position: absolute;
+            width: 10px;
+            height: 10px;
+            background: #ffb6c1;
+            border-radius: 50%;
+            opacity: 0.8;
+            animation: sparkleAnim 1.5s linear forwards;
+        }
+
+        @keyframes sparkleAnim {
+            0% { transform: translateY(0) scale(1); opacity: 1; }
+            100% { transform: translateY(-60px) scale(0.5); opacity: 0; }
+        }
+
+        button {
+            background-color: #1e90ff;
+            color: white;
+            border: none;
+            padding: 14px 28px;
+            font-size: 18px;
+            border-radius: 12px;
+            cursor: pointer;
+            margin-top: 25px;
+            transition: transform 0.2s, background-color 0.2s;
+        }
+
+        button:hover {
+            background-color: #63b3ff;
+            transform: scale(1.05);
+        }
+
+        @media (max-width: 768px) {
+            video {
+                width: 95%;
+            }
+            button {
+                padding: 12px 20px;
+                font-size: 16px;
+            }
+            h1 {
+                font-size: 1.5em;
+            }
+        }
+    </style>
+</head>
+<body>
+
+<h1>Someone special has something to say ✨🕊️</h1>
+
+<div class="video-container">
+    <video id="vid" controls autoplay muted>
+        <source src="/static/appa.mp4" type="video/mp4">
+        Your browser does not support the video tag.
+    </video>
+    <div class="sparkles"></div>
+</div>
+
+<button onclick="go()">Next 💌</button>
+
+<script>
+function go(){
+    window.location.href = "/final";
+}
+
+// Sparkle effect
+function createSparkle() {
+    const sparkle = document.createElement('div');
+    sparkle.classList.add('spark');
+    sparkle.style.left = Math.random() * 100 + '%';
+    sparkle.style.top = Math.random() * 80 + '%';
+    sparkle.style.animationDuration = (0.8 + Math.random()*1.2) + 's';
+    document.querySelector('.sparkles').appendChild(sparkle);
+    setTimeout(() => sparkle.remove(), 1500);
+}
+setInterval(createSparkle, 250);
+</script>
+
+</body>
+</html>

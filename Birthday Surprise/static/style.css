@@ -1,0 +1,22 @@
+body{
+    text-align:center;
+    font-family:Arial;
+    background: linear-gradient(to right,#ff758c,#ff7eb3);
+    color:white;
+}
+
+button{
+    padding:12px 25px;
+    margin-top:20px;
+    border:none;
+    border-radius:12px;
+    background:white;
+    color:#ff4d6d;
+    cursor:pointer;
+}
+
+input{
+    padding:10px;
+    border-radius:10px;
+    border:none;
+}

@@ -1,0 +1,143 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <title>Birthday Surprise - Page 1</title>
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <style>
+        body{
+            margin:0;
+            padding:0;
+            height:100vh;
+            display:flex;
+            flex-direction:column;
+            justify-content:center;
+            align-items:center;
+            background: linear-gradient(135deg,#ffdde1,#c2e9fb,#e0c3fc);
+            background-size:300% 300%;
+            animation:bgMove 10s ease infinite;
+            font-family:'Segoe UI',sans-serif;
+            overflow:hidden;
+            text-align:center;
+        }
+
+        @keyframes bgMove{
+            0%{background-position:0% 50%;}
+            50%{background-position:100% 50%;}
+            100%{background-position:0% 50%;}
+        }
+
+        h1{
+            font-size:28px;
+            color:#003366;
+            margin-bottom:30px;
+            text-shadow:0 0 10px white,0 0 20px #66ccff;
+        }
+
+        .heart{
+            display:inline-block;
+            margin-left:5px;
+            animation:blueGlow 2s infinite alternate;
+        }
+
+        @keyframes blueGlow{
+            from{ text-shadow:0 0 5px #3399ff; }
+            to{ text-shadow:0 0 20px #3399ff,0 0 30px #66ccff; }
+        }
+
+        button{
+            padding:12px 30px;
+            border:none;
+            border-radius:30px;
+            background: linear-gradient(to right,#ff4d6d,#0072ff);
+            color:white;
+            font-size:16px;
+            cursor:pointer;
+            transition:0.3s;
+        }
+
+        button:hover{
+            transform:scale(1.1);
+            box-shadow:0 0 20px #ff4d6d,0 0 40px #0072ff;
+        }
+
+        .heart-float{
+            position:absolute;
+            font-size:18px;
+            animation:float 6s linear infinite;
+        }
+
+        @keyframes float{
+            0%{transform:translateY(100vh);opacity:1;}
+            100%{transform:translateY(-10vh);opacity:0;}
+        }
+
+        .sparkle{
+            position:absolute;
+            width:6px;
+            height:6px;
+            background:white;
+            border-radius:50%;
+            opacity:0.8;
+            animation:sparkleAnim 1s linear forwards;
+        }
+
+        @keyframes sparkleAnim{
+            0%{transform:scale(0);opacity:1;}
+            100%{transform:scale(1.5) translateY(-20px);opacity:0;}
+        }
+
+        .white-bird{
+            position:absolute;
+            font-size:30px;
+            top:40%;
+            left:-10%;
+            animation:flyBird 12s linear infinite;
+        }
+
+        @keyframes flyBird{
+            0%{left:-10%; top:40%;}
+            50%{left:50%; top:30%;}
+            100%{left:110%; top:40%;}
+        }
+
+    </style>
+</head>
+<body>
+
+<h1>Almost there… just a little more <span class="heart">💙</span> ✨ 🕊️</h1>
+
+<button onclick="goNext()">Click Me 💖</button>
+
+<div class="white-bird">🕊️</div>
+
+<script>
+function goNext(){
+    window.location.href="/page2";
+}
+
+// Floating hearts
+setInterval(()=>{
+    let heart = document.createElement("div");
+    heart.className="heart-float";
+    heart.innerHTML = Math.random() > 0.5 ? "💖" : "💙";
+    heart.style.left = Math.random()*100 + "vw";
+    heart.style.fontSize = (10 + Math.random()*20) + "px";
+    document.body.appendChild(heart);
+    setTimeout(()=>heart.remove(),6000);
+},300);
+
+// Sparkles near heart
+setInterval(()=>{
+    let heartEl = document.querySelector('.heart');
+    let sparkle = document.createElement('div');
+    sparkle.className = 'sparkle';
+    document.body.appendChild(sparkle);
+    let rect = heartEl.getBoundingClientRect();
+    sparkle.style.left = rect.left + rect.width/2 + (Math.random()*20-10) + 'px';
+    sparkle.style.top = rect.top + rect.height/2 + (Math.random()*20-10) + 'px';
+    setTimeout(()=>sparkle.remove(),1000);
+},300);
+</script>
+
+</body>
+</html>
